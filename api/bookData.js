@@ -16,6 +16,18 @@ const getBooks = () => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const getAuthors = () => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/author.json`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(Object.values(data)))
+    .catch(reject);
+});
+
 // TODO: DELETE BOOK
 const deleteBook = (firebaseKey) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/books/${firebaseKey}.json`, {
@@ -55,6 +67,7 @@ const booksOnSale = () => new Promise((resolve, reject) => {
 
 export {
   getBooks,
+  getAuthors,
   createBook,
   booksOnSale,
   deleteBook,
